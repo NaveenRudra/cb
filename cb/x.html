@@ -6,15 +6,15 @@
     <title>CORS test</title>
 
     <script>
-        var url = '.'
+        var _url = '.'
 
         function getX() {
-            console.log('--- getX() ask from: ' + url);
+            console.log('--- getX() ask from: ' + _url);
 
             var xmlh = new XMLHttpRequest()
             xmlh.onreadystatechange = func2
 
-            xmlh.open("POST", url + '/x.php' + "?r=" + Math.random(), true)
+            xmlh.open("POST", _url + '/x.php' + "?r=" + Math.random(), true)
             xmlh.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
             xmlh.responseType = 'application/json'
 
@@ -41,13 +41,13 @@
                 var ss = s.split('?')
                 if (ss.length > 1) {
                     var s = ss[1].trim().substr(0, 1)
-                    if ((s == 'r') || (s == '1')) url = 'http://romleon.rf.gd/cb'
-                    if ((s == 'k') || (s == '2')) url = 'http://rombase.kl.com.ua/cb'
-                    if ((s == 'b') || (s == '3')) url = 'http://rombase.byethost7.com/cb'
-                    if ((s == 'c') || (s == '4')) url = 'http://php1-leonrom.c9users.io/cb'
+                    if ((s == 'r') || (s == '1')) _url = 'http://romleon.rf.gd/cb'
+                    if ((s == 'k') || (s == '2')) _url = 'http://rombase.kl.com.ua/cb'
+                    if ((s == 'b') || (s == '3')) _url = 'http://rombase.byethost7.com/cb'
+                    if ((s == 'c') || (s == '4')) _url = 'http://php1-leonrom.c9users.io/cb'
                 }
-                getX()
             }
+            getX()
         }
     </script>
 </head>
