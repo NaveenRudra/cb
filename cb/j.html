@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>JSONP test</title>
+    <script>
+        var scriptId = 'scriptId'
+        var url = '.'
+
+        function removeScript() {
+            var elem = document.scripts[scriptId] 
+            return elem.parentNode.removeChild(elem)
+        }
+
+        function func1(re) {
+            console.log('=== receive: ' + re.result)
+            removeScript()
+            document.getElementById("result").innerHTML = re.result
+        }
+
+        function getJ() {
+            console.log('--- getJ() ask from: ' + url)
+            
+            var params = document.getElementById("keytxt").value
+            var script = document.createElement("script")
+            
+            script.src = url + '/j.php' + '?func=func1' + '&prms=' + params
+            script.type = 'text/javascript'
+            script.id = scriptId
+
+            document.head.appendChild(script)
+            console.log('+++ getJ() asked')
+        }
+        
+        function start(){
+            var ss = document.baseURI.split('?')
+            if (ss.length > 1){
+                var s = ss[1].trim().substr(0, 1)
+                if ((s == 'r')||(s == '1')) url = 'http://romleon.rf.gd/cb'
+                if ((s == 'k')||(s == '2')) url = 'http://rombase.kl.com.ua/cb'
+                if ((s == 'b')||(s == '3')) url = 'http://rombase.byethost7.com/cb'
+                if ((s == 'c')||(s == '4')) url = 'http://php1-leonrom.c9users.io/cb'
+            }
+            getJ()
+        }
+    </script>
+</head>
+
+<body onload="start()">
+    <b>JSONP</b> to server: <input type="text" id="keytxt"/>
+    <p/>
+    <input type="button" value="get JSONP" onclick="getJ()" />
+    <div id="result"></div>
+</body>
+
+</html>

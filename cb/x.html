@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>CORS test</title>
+
+    <script>
+        var url = '.'
+
+        function getX() {
+            console.log('--- getX() ask from: ' + url);
+
+            var xmlh = new XMLHttpRequest()
+            xmlh.onreadystatechange = func2
+
+            xmlh.open("POST", url + '/x.php' + "?r=" + Math.random(), true)
+            xmlh.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+            xmlh.responseType = 'application/json'
+
+            xmlh.send("parms=" + document.getElementById("keytxt").value)
+
+            function func2(e) { // event 'e' is not used here
+                console.log("=== receive: " +
+                    '  readyState=' + xmlh.readyState +
+                    ', status=' + xmlh.status +
+                    ', statusText=' + xmlh.statusText +
+                    ', responseText=' + xmlh.responseText +
+                    '.')
+                if ((xmlh.readyState == 4) && (xmlh.status == 200)) {
+                    document.getElementById("result").innerHTML = xmlh.responseText
+                }
+            }
+
+            console.log('... finish')
+        }
+
+        function start() {
+            var s = document.baseURI
+            if (s && (s.length > 0)) {
+                var ss = s.split('?')
+                if (ss.length > 1) {
+                    var s = ss[1].trim().substr(0, 1)
+                    if ((s == 'r') || (s == '1')) url = 'http://romleon.rf.gd/cb'
+                    if ((s == 'k') || (s == '2')) url = 'http://rombase.kl.com.ua/cb'
+                    if ((s == 'b') || (s == '3')) url = 'http://rombase.byethost7.com/cb'
+                    if ((s == 'c') || (s == '4')) url = 'http://php1-leonrom.c9users.io/cb'
+                }
+                getX()
+            }
+        }
+    </script>
+</head>
+
+<body onload="start()">
+    <b>XML </b> to server: <input type="text" id="keytxt" />
+    <input type="button" value="get JSONP!" onclick="getX()" />
+    <div id="result"></div>
+</body>
+
+</html>
