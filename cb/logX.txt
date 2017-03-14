@@ -1,0 +1,11 @@
+started X: HTTP_HOST  =crossbrowser-leonrom.c9users.io
+started X: HTTP_ORIGIN=http://rombase.kl.com.ua
+started X:  http= http
+started X:  hostname= rombase.kl.com.ua
+started X:  username= 
+started X:  password= 
+started X:  /path= 
+started X:  arg=value= 
+host==rombase.kl.com.ua
+set headers
+your domain is NOT allowed

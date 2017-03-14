@@ -1,6 +1,10 @@
 <?php               
     $f = fopen( './logJ.txt', "w" );
     fwrite( $f, "started" . "\n");
+    fwrite( $f, "started X: " .  $_SERVER['HTTP_HOST'] . "\n" );
+    fwrite( $f, "started X: " .  $_SERVER['HTTP_ORIGIN'] . "\n" );
+//    fwrite($f,  var_dump($_SERVER));
+    
     if (isset($_SERVER['HTTP_ORIGIN'])) {
         fwrite( $f, "http_origin=" . $_SERVER['HTTP_ORIGIN'] . "\n");
     }else{
@@ -20,7 +24,7 @@
     $func = $_REQUEST['func'];
 
     $t = "$prms = " . time() ;
-    fwrite( $f, "finish: t=$t" . "\n" );                
+    fwrite( $f, "finish : t=$t" . "\n" );                
         
     echo($func.'({"result":"' . $t . '",' . '"typ":"addUser"})');  
     

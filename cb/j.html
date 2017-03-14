@@ -1,15 +1,14 @@
-<!DOCTYPE HTML>
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>JSONP test</title>
     <script>
         var _scriptId = 'scriptId'
         var _url = '.'
 
         function removeScript() {
-            var elem = document.scripts[_scriptId] 
+            var elem = document.scripts[_scriptId]
             return elem.parentNode.removeChild(elem)
         }
 
@@ -21,10 +20,10 @@
 
         function getJ() {
             console.log('--- getJ() ask from: ' + _url)
-            
+
             var params = document.getElementById("keytxt").value
             var script = document.createElement("script")
-            
+
             script.src = _url + '/j.php' + '?func=func1' + '&prms=' + params
             script.type = 'text/javascript'
             script.id = _scriptId
@@ -32,15 +31,20 @@
             document.head.appendChild(script)
             console.log('+++ getJ() asked')
         }
-        
-        function start(){
-            var ss = document.baseURI.split('?')
-            if (ss.length > 1){
-                var s = ss[1].trim().substr(0, 1)
-                if ((s == 'r')||(s == '1')) _url = 'http://romleon.rf.gd/cb'
-                if ((s == 'k')||(s == '2')) _url = 'http://rombase.kl.com.ua/cb'
-                if ((s == 'b')||(s == '3')) _url = 'http://rombase.byethost7.com/cb'
-                if ((s == 'c')||(s == '4')) _url = 'http://php1-leonrom.c9users.io/cb'
+
+        function start() {
+            var s = document.baseURI
+            if (s && (s.length > 0)) {
+                var ss = document.baseURI.split('?')
+                if (ss.length > 1) {
+                    var u = ss[1].trim().substr(0, 1)
+                    _url = ' https://crossbrowser-leonrom.c9users.io/cb'  //  default url in case (u != '')
+                    if ((u == 'r') || (u == '1')) _url = 'http://romleon.rf.gd/cb'
+                    if ((u == 'h') || (u == '2')) _url = 'http://rombase.h1n.ru/cb'
+                    if ((u == 'k') || (u == '3')) _url = 'http://rombase.kl.com.ua/cb'
+                    if ((u == 'i') || (u == '4')) _url = 'http://rombase.ihostfull.com/cb'
+                    if ((u == 'b') || (u == '5')) _url = 'http://rombase.byethost7.com/cb'
+                }
             }
             getJ()
         }
@@ -48,7 +52,7 @@
 </head>
 
 <body onload="start()">
-    <b>JSONP</b> to server: <input type="text" id="keytxt"/>
+    <b>JSONP</b> to server: <input type="text" id="keytxt" />
     <p/>
     <input type="button" value="get JSONP" onclick="getJ()" />
     <div id="result"></div>
