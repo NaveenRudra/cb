@@ -1,4 +1,0 @@
-started X
-host=php1-leonrom.c9users.io
-set headers
-finish: prm=
