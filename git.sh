@@ -2,6 +2,10 @@
 git add . 
 git commit -m "first commit"
 #git remote add origin   https://github.com/leonrom/cb.git
+
+git add -u :/ # adds all modified file changes to the stage 
+git add * :/  # adds modified and any new files (that's not gitignore'ed) to the stage
+
 git pull
 git push -u origin master
 
