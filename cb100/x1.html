@@ -7,31 +7,38 @@
 
     <script>
         var _url = '.'
-        var _xmlh
+        var _nnn0 = 100
+        var _nnn
+        var _beg
+        var xmlh
 
         function getX() {
-            console.log('--- getX() ask from: ' + _url);
 
-            _xmlh = new XMLHttpRequest()
-            _xmlh.onreadystatechange = func2
+            xmlh = new XMLHttpRequest()
+            xmlh.onreadystatechange = func2
 
-            _xmlh.open("POST", _url + '/x.php' + "?r=" + Math.random(), true)
-            _xmlh.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
-            _xmlh.responseType = 'text'
+            xmlh.open("POST", _url + '/x1.php' + "?r=" + Math.random(), true)
+            xmlh.setRequestHeader('Content-type', 'application/x-www-form-urlencoded')
+            xmlh.responseType = 'text'
 
-            _xmlh.send("parms=" + document.getElementById("keytxt").value)
-            console.log('... finish')
+            xmlh.send("parms=" + document.getElementById("keytxt").value)
+
         }
 
+
         function func2(e) { // event 'e' is not used here
-            console.log("=== receive: " +
-                '  readyState=' + _xmlh.readyState +
-                ', status=' + _xmlh.status +
-                ', statusText=' + _xmlh.statusText +
-                ', responseText=' + _xmlh.responseText +
-                '.')
-            if ((_xmlh.readyState == 4) && (_xmlh.status == 200)) {
-                document.getElementById("result").innerHTML = _xmlh.responseText
+            if ((xmlh.readyState == 4) && (xmlh.status == 200)) {
+                document.getElementById("result").innerHTML = xmlh.responseText
+
+            console.log('=== receive: responseText=' + xmlh.responseText )
+                
+                if (_nnn-- > 0) {
+                    getX()
+                }
+                else {
+                    var end = Date.now();
+                    console.log("Скрипт выполнился " + _nnn0 + " раз за " + (end - _beg) + " ms.");
+                }
             }
         }
 
@@ -49,6 +56,11 @@
                     if ((u == 'b') || (u == '5')) _url = 'http://rombase.byethost7.com/cb'
                 }
             }
+        }
+
+        function testX() {
+            _nnn = _nnn0
+            _beg = Date.now();
             getX()
         }
     </script>
@@ -56,7 +68,7 @@
 
 <body onload="start()">
     <b>XML </b> to server: <input type="text" id="keytxt" />
-    <input type="button" value="get JSONP!" onclick="getX()" />
+    <input type="button" value="get JSONP!" onclick="testX()" />
     <div id="result"></div>
 </body>
 

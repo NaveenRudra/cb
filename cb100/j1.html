@@ -6,6 +6,9 @@
     <script>
         var _scriptId = 'scriptId'
         var _url = '.'
+        var _nnn0 = 100
+        var _nnn
+        var _beg
 
         function removeScript() {
             var elem = document.scripts[_scriptId]
@@ -16,10 +19,15 @@
             console.log('=== receive: ' + re.result)
             removeScript()
             document.getElementById("result").innerHTML = re.result
+            if (_nnn-- > 0){
+                getJ()
+            }else{
+                var end = Date.now();
+                console.log("Скрипт выполнился " + _nnn0 + " раз за " + (end - _beg) +" ms." );
+            }
         }
 
         function getJ() {
-            console.log('--- getJ() ask from: ' + _url)
 
             var params = document.getElementById("keytxt").value
             var script = document.createElement("script")
@@ -29,7 +37,6 @@
             script.id = _scriptId
 
             document.head.appendChild(script)
-            console.log('+++ getJ() asked')
         }
 
         function start() {
@@ -46,6 +53,10 @@
                     if ((u == 'b') || (u == '5')) _url = 'http://rombase.byethost7.com/cb'
                 }
             }
+        }
+        function testJ(){
+            _nnn = _nnn0
+            _beg = Date.now();
             getJ()
         }
     </script>
@@ -54,7 +65,7 @@
 <body onload="start()">
     <b>JSONP</b> to server: <input type="text" id="keytxt" />
     <p/>
-    <input type="button" value="get JSONP" onclick="getJ()" />
+    <input type="button" value="test JSONP" onclick="testJ()" />
     <div id="result"></div>
 </body>
 
